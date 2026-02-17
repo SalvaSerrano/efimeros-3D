@@ -59,6 +59,9 @@
             <button id="btn-edit" class="tool-btn" title="Editar">
                 <span class="icon">✏️</span>
             </button>
+            <button id="btn-costs" class="tool-btn" title="Editar Costes">
+                <span class="icon">💲</span>
+            </button>
             <button id="btn-delete" class="tool-btn" title="Borrar">
                 <span class="icon">🗑️</span>
             </button>
@@ -86,6 +89,20 @@
                 <p>🖱️ Click Izq: Colocar</p>
             </div>
         </aside>
+
+        <!-- Cost Editor Modal -->
+        <dialog id="cost-editor-modal">
+            <div class="modal-content">
+                <h2>Editar Costes</h2>
+                <div id="cost-list" class="cost-list">
+                    <!-- Cost inputs will be injected here -->
+                </div>
+                <div class="modal-actions">
+                    <button id="btn-cancel-costs">Cancelar</button>
+                    <button id="btn-save-costs" class="primary">Guardar</button>
+                </div>
+            </div>
+        </dialog>
 
         <!-- Container for Three.js -->
         <div id="three-container"></div>
