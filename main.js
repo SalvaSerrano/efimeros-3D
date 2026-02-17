@@ -42,6 +42,7 @@ class App3D {
         this.setupToolbar();
         this.renderModulesUI();
         this.setupBudgetEdit();
+        this.setupCostEditor();
         this.animate();
 
         window.addEventListener('resize', () => this.onWindowResize());
@@ -59,6 +60,56 @@ class App3D {
                 }
             };
         }
+    }
+
+    setupCostEditor() {
+        const btnCosts = document.getElementById('btn-costs');
+        const modal = document.getElementById('cost-editor-modal');
+        const btnCancel = document.getElementById('btn-cancel-costs');
+        const btnSave = document.getElementById('btn-save-costs');
+
+        if (btnCosts) btnCosts.onclick = () => this.openCostEditor();
+        if (btnCancel) btnCancel.onclick = () => modal.close();
+        if (btnSave) btnSave.onclick = () => this.saveCosts();
+
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                const rect = modal.getBoundingClientRect();
+                if (e.target === modal) modal.close();
+            });
+        }
+    }
+
+    openCostEditor() {
+        const modal = document.getElementById('cost-editor-modal');
+        const list = document.getElementById('cost-list');
+        list.innerHTML = '';
+        MODULES.forEach(mod => {
+            const item = document.createElement('div');
+            item.className = 'cost-item';
+            item.innerHTML = `<label>${mod.name}</label><input type="number" data-id="${mod.id}" value="${mod.cost}" min="0" step="1" />`;
+            list.appendChild(item);
+        });
+        modal.showModal();
+    }
+
+    saveCosts() {
+        const inputs = document.querySelectorAll('#cost-list input');
+        inputs.forEach(input => {
+            const id = input.getAttribute('data-id');
+            const newCost = parseFloat(input.value);
+            const mod = MODULES.find(m => m.id === id);
+            if (mod && !isNaN(newCost)) mod.cost = newCost;
+        });
+        this.recalculateBudget();
+        this.renderModulesUI();
+        document.getElementById('cost-editor-modal').close();
+    }
+
+    recalculateBudget() {
+        this.totalCost = 0;
+        this.placedObjects.forEach(obj => { this.totalCost += obj.module.cost; });
+        this.updateBudget(0);
     }
 
     setupLights() {
