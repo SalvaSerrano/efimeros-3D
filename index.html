@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efímeros 3D - Diseño de Espacio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="header-main">
+                <div class="brand">
+                    <h1>Diseño de Espacios Efímeros y Expositivos</h1>
+                    <span id="active-mode" class="mode-badge">Modo: Selección</span>
+                </div>
+                <div class="budget-container">
+                    <div class="budget-label">Presupuesto (máx: <span id="budget-limit-val"
+                            class="editable-limit">20000</span> €)</div>
+                    <div id="total-cost" class="budget-value">0 €</div>
+                    <div class="progress-wrapper">
+                        <div id="budget-progress" class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="checklist">
+                <div class="check-item" data-id="escenario"><span>Escenario</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="check-item" data-id="banco"><span>Banco</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="check-item" data-id="mesa"><span>Mesa</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="check-item" data-id="globo_peq"><span>Globo</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="check-item" data-id="sofa"><span>Sofá</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="check-item" data-id="pared"><span>Pared</span>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Left Toolbar -->
+        <nav class="toolbar-left">
+            <button id="btn-select" class="tool-btn active" title="Seleccionar">
+                <span class="icon">🖱️</span>
+            </button>
+            <button id="btn-edit" class="tool-btn" title="Editar">
+                <span class="icon">✏️</span>
+            </button>
+            <button id="btn-delete" class="tool-btn" title="Borrar">
+                <span class="icon">🗑️</span>
+            </button>
+            <button id="btn-rotate" class="tool-btn" title="Rotar (R)">
+                <span class="icon">🔄</span>
+            </button>
+            <button id="btn-clear" class="tool-btn" title="Borrar Todo">
+                <span class="icon">🧹</span>
+            </button>
+            <button id="btn-screenshot" class="tool-btn" title="Captura de Pantalla">
+                <span class="icon">📸</span>
+            </button>
+        </nav>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Módulos</h2>
+            <div id="module-list" class="module-buttons">
+                <!-- Modules will be injected here -->
+            </div>
+            <div class="controls-hint">
+                <p>🖱️ Click Der: Orbitar</p>
+                <p>⌨️ Shift + Click Der: Pan</p>
+                <p>🖱️ Rueda: Zoom</p>
+                <p>🖱️ Click Izq: Colocar</p>
+            </div>
+        </aside>
+
+        <!-- Container for Three.js -->
+        <div id="three-container"></div>
+    </div>
+
+    <!-- Three.js Import map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
